@@ -2,4 +2,18 @@
 
 {% block content %}
 Welcome to dsschult.com!
+
+<div class="entries">
+{% for e in entries %}
+  <div class="entry">
+    <div class="entry-header">
+      {{ e['name'].replace('_',' ')|title }}
+    </div>
+    <div class="entry-body">
+      {{ e['data']|safe }}
+    </div>
+  </div>
+{% endfor %}
+</div>
+
 {% endblock %}
