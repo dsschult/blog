@@ -106,3 +106,4 @@ $RECYCLE.BIN/
 *.swp
 
 venv
+entries.db

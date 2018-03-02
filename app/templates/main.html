@@ -1,19 +1,29 @@
 {% extends "layout.html" %}
 
+{% block title %}Home{% endblock %}
+
+{% block left_column %}
+<section>
+  <h3><a href="{{ url_for('about') }}">About Me</a></h3>
+  <p>blah</p>
+</section>
+{% endblock %}
+
 {% block content %}
 Welcome to dsschult.com!
 
 <div class="entries">
 {% for e in entries %}
-  <div class="entry">
-    <div class="entry-header">
-      {{ e['name'].replace('_',' ')|title }}
-    </div>
+  <article class="entry">
+    <header class="entry-header">
+      <h2><a href="{{ url_for('entries', name=e['url']) }}">
+          {{ e['title'] }}
+      </a></h2>
+    </header>
     <div class="entry-body">
       {{ e['data']|safe }}
     </div>
-  </div>
+  </article>
 {% endfor %}
 </div>
-
 {% endblock %}

@@ -1,0 +1,151 @@
+h1 {
+  font-size: 28pt;
+  margin: 1em 0 .5em;
+}
+h2 {
+  font-size: 24pt;
+  margin: 1em 0 .3em;
+}
+h3 {
+  font-size: 20pt;
+  margin: 1em 0 .2em;
+}
+h4 {
+  font-size: 16pt;
+  margin: 1em 0 .1em;
+}
+div.entry-body h1 {
+  font-size: 20pt;
+}
+div.entry-body h2 {
+  font-size: 16pt;
+}
+div.entry-body h3 {
+  font-size: 14pt;
+}
+div.entry-body h4 {
+  font-size: 12pt;
+}
+
+a {
+  color: #146a7f;
+}
+a:visited {
+  color: #004c5d;
+}
+a:active {
+  color: #2aa9b0;
+}
+
+h1, h2, h3, h4, h1 a, h2 a, h3 a, h4 a {
+  color: #252115 !important;
+  text-decoration: none;
+}
+
+div.entry-body h1 a, div.entry-body h2 a,
+div.entry-body h3 a, div.entry-body h4 a {
+  color: #004c5d;
+  text-decoration: none;
+}
+
+html {
+  background: #222;
+}
+body {
+  display: flex;
+  flex-flow: row wrap;
+  align-content: flex-start;
+  max-width: 1600px;
+  min-height: 100vh;
+  background: #fefdfd;
+  margin: auto;
+}
+body>* {
+  flex: 0 1 auto;
+  margin: 0 1em;
+}
+
+header {
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+}
+header>* {
+  flex: 0 1 auto;
+}
+header img.logo {
+  height: 5em;
+  margin: .5em;
+}
+header .title {
+  flex: 1 1 auto;
+}
+header h1 {
+  display: block;
+  font-family: 'Tangerine', cursive;
+  font-size: 48pt;
+  margin: .5em .2em 0;
+}
+header h3 {
+  display: block;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12pt;
+  margin: .2em 0 .2em 2em;
+}
+header nav {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-end;
+  height: 1em;
+}
+header nav a {
+  display: block;
+  padding: .5em 1em;
+  color: #30391d;
+  background: #eee;
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 14pt;
+}
+header nav a:hover {
+  background: #ddd;
+}
+aside.sidebar {
+  width: 12em;
+}
+aside.sidebar #searchbox {
+  width: 11em;
+}
+main {
+  flex: 1 1 auto;
+}
+footer {
+  width: 100%;
+}
+
+@media all and (min-width: 800px) {
+  /* We tell sidebar and content to share a row, with sidebar on the left */
+  aside.sidebar { flex: 0 0 auto; }
+  main { flex: 1 1 auto; }
+  header { order: 1; }
+  main { order: 3; }
+  aside.sidebar { order: 2; }
+  footer { order: 4; }
+
+  
+  header img.logo {
+    height: 10em;
+  }
+}
+
+.entry-header {
+  margin: .2em 0;
+}
+.entry-header h2 {
+  margin: 0;
+}
+.entry-header .date {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 10pt;
+  color: #30391d;
+}

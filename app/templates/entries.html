@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+{{ name }}
+{% endblock %}
+
+{% block content %}
+<div class="entry">
+  <div class="entry-header">
+    <h2>{{ title }}</h2>
+    {% if date_posted == date_modified %}
+    <div class="date">Date posted: {{ date_posted }}</div>
+    {% else %}
+    <div class="date">Date posted: {{ date_posted }}</div>
+    <div class="date">Last updated: {{ date_modified }}</div>
+    {% endif %}
+  </div>
+  <div class="entry-body">
+    {{ data|safe }}
+  </div>
+</div>
+{% endblock %}

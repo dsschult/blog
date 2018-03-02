@@ -2,15 +2,40 @@
 <html>
   <head>
     {% block head %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro:300|Tangerine:700">
+    <link rel="stylesheet" href="{{ url_for('static', filename='modern-normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='pygments.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <title>{% block title %}{% endblock %} - dsschult.com</title>
     {% endblock %}
   </head>
   <body>
-    <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer">
+    <header>
+      <a href="{{ url_for('main') }}"><img class="logo" src="{{ url_for('static', filename='logo.jpg') }}" /></a>
+      <div class="title">
+        <h1><a href="{{ url_for('main') }}">David Schultz</a></h1>
+        <h3>Just another programming blog.</h3>
+      </div>
+      <nav>
+        <a href="{{ url_for('main') }}">Blog</a>
+        <a href="{{ url_for('about') }}">About</a>
+      </nav>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+    <aside class="sidebar">
+      {% block left_column %}
+      {% endblock %}
+      <section>
+        <h3>Search</h3>
+        <form action="https://www.google.com/search">
+          <input type="hidden" name="q" value="site:dsschult.com" />
+          <input id="searchbox" type="text" name="q" value="" />
+        </form>
+      </section>
+    </aside>
+    <footer>
       {% block footer %}
       {% endblock %}
-    </div>
+    </footer>
   </body>
 </html>
