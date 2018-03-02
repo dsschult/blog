@@ -1,13 +1,12 @@
 from datetime import datetime
 
 import htmlmin
-from slimmer import html_slimmer # or xhtml_slimmer, css_slimmer
 
 def minify(html):
     try:
         html = htmlmin.minify(html, remove_comments=True, remove_empty_space=True)
     except Exception:
-        html = html_slimmer(html.strip().replace('\n',' ').replace('\t',' ').replace('\r',' '))
+        pass
     return html
 
 
