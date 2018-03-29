@@ -55,7 +55,8 @@ body {
   display: flex;
   flex-flow: row wrap;
   align-content: flex-start;
-  max-width: 1600px;
+  max-width: 1400px;
+  min-width: 435px;
   min-height: 100vh;
   background: #fefdfd;
   margin: auto;
@@ -65,76 +66,87 @@ body>* {
   margin: 0 1em;
 }
 
-header {
+body>header {
   width: 100%;
   display: flex;
+  flex: 0 1 auto;
   flex-flow: row wrap;
 }
-header>* {
+body>header>* {
   flex: 0 1 auto;
 }
-header img.logo {
+body>header img.logo {
   height: 5em;
   margin: .5em;
 }
-header .title {
-  flex: 1 1 auto;
+body>header .title {
+  flex: 1 1 55%;
 }
-header h1 {
+body>header h1 {
   display: block;
   font-family: 'Tangerine', cursive;
   font-size: 48pt;
-  margin: .5em .2em 0;
+  margin: 0 .2em 0;
 }
-header h3 {
+body>header h3 {
   display: block;
   font-family: 'Open Sans', sans-serif;
   font-size: 12pt;
   margin: .2em 0 .2em 2em;
 }
-header nav {
+body>header nav {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
-  height: 1em;
 }
-header nav a {
+body>header nav a {
   display: block;
   padding: .5em 1em;
+  height: 2.25em;
   color: #30391d;
   background: #eee;
   text-decoration: none;
   font-family: 'Open Sans', sans-serif;
   font-size: 14pt;
 }
-header nav a:hover {
+body>header nav a:hover {
   background: #ddd;
 }
-aside.sidebar {
+body>aside.sidebar {
   width: 12em;
 }
-aside.sidebar #searchbox {
+body>aside.sidebar #searchbox {
   width: 11em;
 }
-main {
+body>aside.sidebar section:last-child h4 {
+  margin-top: 1.5em;
+  margin-bottom: .3em;
+}
+body>main {
   flex: 1 1 auto;
 }
-footer {
+body>footer {
+  margin-bottom: 1em;
   width: 100%;
 }
 
 @media all and (min-width: 800px) {
   /* We tell sidebar and content to share a row, with sidebar on the left */
-  aside.sidebar { flex: 0 0 auto; }
-  main { flex: 1 1 auto; }
-  header { order: 1; }
-  main { order: 3; }
-  aside.sidebar { order: 2; }
-  footer { order: 4; }
-
+  body>aside.sidebar { flex: 0 0 auto; }
+  body>main { flex: 1 1 50%; }
+  body>header { order: 1; }
+  body>main { order: 3; }
+  body>aside.sidebar { order: 2; }
+  body>footer { order: 4; }
   
-  header img.logo {
+  body>header img.logo {
     height: 10em;
+  }
+  body>header .title {
+    flex: 1 1 40%;
+  }
+  body>header h1 {
+    margin-top: .5em;
   }
 }
 
@@ -148,4 +160,9 @@ footer {
   font-family: 'Open Sans', sans-serif;
   font-size: 10pt;
   color: #30391d;
+}
+
+img.portrait {
+    float: right;
+    padding: 1em;
 }

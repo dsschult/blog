@@ -38,9 +38,9 @@ def to_html(data):
 
 class Entries:
     def __init__(self):
-        self.db = sqlite3.connect('entries.db')
         self.entries = {}
-        self.init()
+        for name in list_entries():
+            self.entries[name] = get_entry_metadata(name)
 
     def get(self, name):
         if name not in self.entries:
@@ -48,11 +48,11 @@ class Entries:
         return self._process(name, get_entry)
 
     def get_last_n(self, n=10):
-        names = sorted(self.entries, key=lambda x:self.entries[x]['date_modified'], reverse=True)[:n]
+        names = sorted(self.entries, key=lambda x:self.entries[x]['mtime'], reverse=True)[:n*2]
         ret = []
         for name in names:
             ret.append(self._process(name, get_entry_teaser))
-        return ret
+        return sorted(ret, key=lambda x:x['date_posted'], reverse=True)[:n]
 
     def _process(self, name, func):
         ret = self.entries[name].copy()
@@ -61,52 +61,9 @@ class Entries:
         ret['data'] = data
         ret['name'] = name
         ret['title'] = meta.get('title', name.title())
-        ret['date_modified'] = timestamp_to_string(ret['date_modified'])
-        ret['date_posted'] = date_to_string(meta['date']) if 'date' in meta else ret['date_modified']
+        ret['date_posted'] = date_to_string(meta['date']) if 'date' in meta else timestamp_to_string(ret['mtime'])
+        ret['date_modified'] = date_to_string(meta['date']) if 'modified' in meta else timestamp_to_string(ret['mtime'])
         return ret
-
-    def init(self):
-        with self.db:
-            self.db.execute('CREATE TABLE IF NOT EXISTS entries (name, date_modified, size)')
-
-        entries = set(list_entries())
-
-        cur = self.db.cursor()
-        cur.execute('SELECT * FROM entries')
-        db_entries = {}
-        for name,dm,s in cur.fetchall():
-            db_entries[name] = {'date_modified':dm,
-                                'size':s}
-
-        db_entries_set = set(db_entries)
-        insert_entries = entries - db_entries_set
-        delete_entries = db_entries_set - entries
-        update_entries = {}
-        for name in db_entries_set & entries:
-            md = get_entry_metadata(name)
-            if db_entries[name] != md:
-                update_entries[name] = md
-                self.entries[name] = md
-            else:
-                self.entries[name] = db_entries[name]
-
-        with self.db:
-            sql = 'DELETE FROM entries WHERE name=?'
-            for name in delete_entries:
-                cur.execute(sql, (name,))
-
-            sql = 'INSERT INTO entries (name, date_modified, size) VALUES (?,?,?)'
-            for name in insert_entries:
-                md = get_entry_metadata(name)
-                bindings = (name,md['date_modified'],md['size'])
-                cur.execute(sql, bindings)
-                self.entries[name] = md
-
-            sql = 'UPDATE entries SET date_modified=?, size=? WHERE name=?'
-            for name in update_entries:
-                bindings = (md['date_modified'],md['size'],name)
-                cur.execute(sql, bindings)
-
 
 ### raw functions ###
 
@@ -133,5 +90,5 @@ def get_entry_metadata(name):
     path = os.path.join(basedir,'entries',name+'.md')
     dm = os.path.getmtime(path)
     s = os.path.getsize(path)
-    return {'date_modified': dm,
+    return {'mtime': dm,
             'size': s}

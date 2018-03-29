@@ -5,20 +5,18 @@
 {% block left_column %}
 <section>
   <h3><a href="{{ url_for('about') }}">About Me</a></h3>
-  <p>blah</p>
+  <p>Software developer, devops, full stack, etc.</p>
 </section>
 {% endblock %}
 
 {% block content %}
-Welcome to dsschult.com!
-
 <div class="entries">
 {% for e in entries %}
   <article class="entry">
     <header class="entry-header">
-      <h2><a href="{{ url_for('entries', name=e['url']) }}">
+      <h3><a href="{{ url_for('entries', name=e['url']) }}">
           {{ e['title'] }}
-      </a></h2>
+      </a></h3>
     </header>
     <div class="entry-body">
       {{ e['data']|safe }}
