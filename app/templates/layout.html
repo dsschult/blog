@@ -3,22 +3,22 @@
   <head>
     {% block head %}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Code+Pro:300|Tangerine:700">
-    <link rel="stylesheet" href="{{ url_for('static', filename='modern-normalize.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='pygments.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="/static/modern-normalize.css">
+    <link rel="stylesheet" href="/static/pygments.css">
+    <link rel="stylesheet" href="/static/style.css">
     <title>{% block title %}{% endblock %} - dsschult.com</title>
     {% endblock %}
   </head>
   <body>
     <header>
-      <a href="{{ url_for('main') }}"><img class="logo" src="{{ url_for('static', filename='logo.jpg') }}" /></a>
+      <a href="/"><img class="logo" src="/static/logo.jpg" /></a>
       <div class="title">
-        <h1><a href="{{ url_for('main') }}">David Schultz</a></h1>
+        <h1><a href="/">David Schultz</a></h1>
         <h3>Just another programming blog.</h3>
       </div>
       <nav>
-        <a href="{{ url_for('main') }}">Blog</a>
-        <a href="{{ url_for('about') }}">About</a>
+        <a href="/">Blog</a>
+        <a href="/about.html">About</a>
       </nav>
     </header>
     <main>{% block content %}{% endblock %}</main>

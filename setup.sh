@@ -1,4 +1,4 @@
 #!/bin/bash
-python3 -m virtualenv venv
+python3 -m virtualenv -p python3 venv
 . venv/bin/activate
-pip install Flask gunicorn markdown pygments htmlmin slimit
+pip install jinja2 markdown pygments htmlmin slimit

@@ -4,7 +4,7 @@
 
 {% block left_column %}
 <section>
-  <h3><a href="{{ url_for('about') }}">About Me</a></h3>
+  <h3><a href="/about.html">About Me</a></h3>
   <p>Software developer, devops, full stack, etc.</p>
 </section>
 {% endblock %}
@@ -14,7 +14,7 @@
 {% for e in entries %}
   <article class="entry">
     <header class="entry-header">
-      <h3><a href="{{ url_for('entries', name=e['url']) }}">
+      <h3><a href="/entries/{{ e['url'] }}">
           {{ e['title'] }}
       </a></h3>
     </header>

@@ -47,6 +47,9 @@ class Entries:
             raise KeyError('No such entry')
         return self._process(name, get_entry)
 
+    def get_names(self):
+        return self.entries.keys()
+
     def get_last_n(self, n=10):
         names = sorted(self.entries, key=lambda x:self.entries[x]['mtime'], reverse=True)[:n*2]
         ret = []
@@ -57,7 +60,7 @@ class Entries:
     def _process(self, name, func):
         ret = self.entries[name].copy()
         meta, data = func(name)
-        ret['url'] = name
+        ret['url'] = name+'.html'
         ret['data'] = data
         ret['name'] = name
         ret['title'] = meta.get('title', name.title())
@@ -83,7 +86,7 @@ def get_entry_teaser(name):
                 break
             data += line
             i += 1
-        data = data.rstrip()+'\n<a href="/entries/'+name+'">&raquo;more</a>'
+        data = data.rstrip()+'\n<a href="/entries/'+name+'.html">&raquo;more</a>'
         return to_html(data)
 
 def get_entry_metadata(name):
