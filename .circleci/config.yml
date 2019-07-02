@@ -9,7 +9,7 @@ jobs:
             - checkout
             - add_ssh_keys:
                 fingerprints:
-                    - "65:cc:39:dc:bd:d3:34:e3:78:48:3b:1f:47:3f:69:04"
+                    - "cb:0d:69:a9:13:90:a6:a7:d1:ee:e0:b6:81:c6:0e:74"
             - run: |
                 ./setup.sh
                 ./run.sh
